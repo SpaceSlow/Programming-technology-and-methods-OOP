@@ -47,4 +47,14 @@ public:
     void writeToFile(ofstream *fout);
 };
 
+class DocumentaryFilm : public Film {
+private:
+    int yearOfRelease;
+public:
+    DocumentaryFilm() {};
+    string getTypeFilm() override;
+    void readFromFile(ifstream *fin);
+    void writeToFile(ofstream *fout);
+};
+
 #endif //FILM_H

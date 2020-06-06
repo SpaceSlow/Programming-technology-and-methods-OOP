@@ -56,6 +56,8 @@ bool FilmList::readFilmsFromFile(string filename) {
             film = new FictionFilm();
         } else if (typeFilm == "Cartoon") {
             film = new CartoonFilm();
+        } else if (typeFilm == "Documentary") {
+            film = new DocumentaryFilm();
         } else {
             fin.close();
             return false;

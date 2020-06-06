@@ -85,3 +85,19 @@ void CartoonFilm::writeToFile(ofstream *fout) {
     Film::writeToFile(fout);
     *fout << "Type animation: " << this->getTypeCartoon() << endl;
 }
+
+string DocumentaryFilm::getTypeFilm() {
+    return "Documentary";
+}
+
+void DocumentaryFilm::readFromFile(ifstream *fin) {
+    Film::readFromFile(fin);
+    string year;
+    getline(*fin, year);
+    this->yearOfRelease = stoi(year);
+}
+
+void DocumentaryFilm::writeToFile(ofstream *fout) {
+    Film::writeToFile(fout);
+    *fout << "Year of release: " << this->yearOfRelease << endl;
+}
