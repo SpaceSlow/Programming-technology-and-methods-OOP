@@ -15,6 +15,7 @@ using std::ofstream;
 class Film {
 private:
     string title;
+    string country;
 public:
     Film() {};
     string getTitle();
