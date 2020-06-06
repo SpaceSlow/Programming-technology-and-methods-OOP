@@ -44,9 +44,10 @@ bool FilmList::readFilmsFromFile(string filename) {
     }
 
     int numFilms;
-    string tmp, typeFilm;
+    string tmp, typeFilm, filterFilms;
     getline(fin, tmp);
     numFilms = stoi(tmp);
+    getline(fin, filterFilms); // Фильтр
 
     for (int i = 0; i < numFilms; ++i) {
         getline(fin, tmp);          // Пропуск пустой строки
@@ -61,7 +62,10 @@ bool FilmList::readFilmsFromFile(string filename) {
             return false;
         }
         film->readFromFile(&fin);
-        this->addFilm(film);
+
+        if (filterFilms == "All" or filterFilms == film->getTypeFilm()) {
+            this->addFilm(film);
+        }
     }
     fin.close();
     return true;
