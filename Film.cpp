@@ -28,6 +28,17 @@ string Film::getTitle() {
     return this->title;
 }
 
+int Film::getVowelsNumberInTitle() {
+    string vowels = "aeiou";
+    int vowelsCount = 0;
+    for (int i = 0; i < this->title.length(); ++i) {
+        if (vowels.find(this->title[i]) != -1) {
+            vowelsCount++;
+        }
+    }
+    return vowelsCount;
+}
+
 string FictionFilm::getTypeFilm() {
     return "Fiction";
 }
