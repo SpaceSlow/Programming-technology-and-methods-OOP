@@ -15,17 +15,30 @@ string Film::getTypeFilm() {
 }
 
 void Film::readFromFile(ifstream *fin) {
+    getline(*fin, this->country);       // Страна, в которой выпустили фильм фильма
     getline(*fin, this->title);        // Название фильма
 }
 
 void Film::writeToFile(ofstream *fout) {
     *fout << endl; // Пустая строка для читабельности
     *fout << "Type film: " << this->getTypeFilm() << endl;
+    *fout << "Country: " << this->country << endl;
     *fout << "Title: " << this->getTitle() << endl;
 }
 
 string Film::getTitle() {
     return this->title;
+}
+
+int Film::getVowelsNumberInTitle() {
+    string vowels = "aeiou";
+    int vowelsCount = 0;
+    for (int i = 0; i < this->title.length(); ++i) {
+        if (vowels.find(this->title[i]) != -1) {
+            vowelsCount++;
+        }
+    }
+    return vowelsCount;
 }
 
 string FictionFilm::getTypeFilm() {

@@ -15,12 +15,14 @@ using std::ofstream;
 class Film {
 private:
     string title;
+    string country;
 public:
     Film() {};
     string getTitle();
     virtual string getTypeFilm() = 0;
     virtual void readFromFile(ifstream *fin);
     virtual void writeToFile(ofstream *fout);
+    virtual int getVowelsNumberInTitle();
 };
 
 class FictionFilm : public Film {

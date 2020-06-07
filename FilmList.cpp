@@ -43,10 +43,21 @@ bool FilmList::readFilmsFromFile(string filename) {
         return false;
     }
 
+    bool doSort = false;
     int numFilms;
-    string tmp, typeFilm;
-    getline(fin, tmp);
+    string tmp, typeFilm, sortFilms, filterFilms;
+    getline(fin, tmp);          // Количество фильмов
     numFilms = stoi(tmp);
+    getline(fin, sortFilms);       // Сортировка
+
+    if (sortFilms == "Sort") {
+        doSort = true;
+    } else if (sortFilms != "No sort") {
+        return false;
+    }
+
+    getline(fin, filterFilms); // Фильтр
+
 
     for (int i = 0; i < numFilms; ++i) {
         getline(fin, tmp);          // Пропуск пустой строки
@@ -63,8 +74,16 @@ bool FilmList::readFilmsFromFile(string filename) {
             return false;
         }
         film->readFromFile(&fin);
-        this->addFilm(film);
+
+        if (filterFilms == "All" or filterFilms == film->getTypeFilm()) {
+            this->addFilm(film);
+        }
     }
+
+    if (doSort) {
+        this->sortFilmsByVowelsNumber();
+    }
+
     fin.close();
     return true;
 }
@@ -89,4 +108,17 @@ bool FilmList::writeFilmsToFile(string filename) {
 
     fout.close();
     return true;
+}
+
+void FilmList::sortFilmsByVowelsNumber() {
+    for(FilmItem* filmItem2 = this->firstFilm; filmItem2; filmItem2 = filmItem2->nextFilm)
+    {
+        for(FilmItem* filmItem1 = this->firstFilm; filmItem1->nextFilm; filmItem1 = filmItem1->nextFilm)
+        {
+            if(filmItem1->film->getVowelsNumberInTitle() > filmItem1->nextFilm->film->getVowelsNumberInTitle())
+            {
+                std::iter_swap(&filmItem1->film, &filmItem1->nextFilm->film);
+            }
+        }
+    }
 }
