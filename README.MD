@@ -16,7 +16,8 @@ Enter in command line or terminal this command in folder with this code:
 
 1. In first line number of films.
 2. Line break.
-3. Sorting films(allowed values: *Sort* and *No sort*).
+3. Sorting films(allowed values: *Sort* and *No sort*).  
+**Note**: Sorting by the number of vowels in the film title.
 4. Filtering films(allowed values: *All* and any type of film, see point 5).
 5. Type film(allowed values: *Fiction*, *Cartoon* and *Documentary*).
 6. Title film.
