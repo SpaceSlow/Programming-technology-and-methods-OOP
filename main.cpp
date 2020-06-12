@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "FilmList.h"
+#include "UnitTests.h"
 
 using std::cout;
 using std::endl;
@@ -8,6 +9,10 @@ using std::string;
 
 
 int main(int argc, char* argv[]) {
+
+//    Unit-tests
+//    UnitTests *unitTests = new UnitTests();
+//    unitTests->run();
 
     if (argc != 3) {
         cout << "Type input and output files." << endl;

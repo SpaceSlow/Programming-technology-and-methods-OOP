@@ -122,3 +122,15 @@ void FilmList::sortFilmsByVowelsNumber() {
         }
     }
 }
+
+int FilmList::getSize() {
+    return this->size;
+}
+
+FilmItem * FilmList::getFirstFilm() {
+    return this->firstFilm;
+}
+
+FilmItem *FilmList::getLastFilm() {
+    return this->lastFilm;
+}
