@@ -24,6 +24,7 @@ public:
     virtual void addFilm(Film *film);
     virtual bool readFilmsFromFile(string filename);
     virtual bool writeFilmsToFile(string filename);
+    virtual void multiMethod(ofstream *fout);
 };
 
 #endif //FILMLIST_H

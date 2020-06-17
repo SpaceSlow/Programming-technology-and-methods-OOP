@@ -21,6 +21,9 @@ public:
     virtual string getTypeFilm() = 0;
     virtual void readFromFile(ifstream *fin);
     virtual void writeToFile(ofstream *fout);
+    virtual void multiMethod(Film *otherFilm, ofstream *fout);
+    virtual void mMFiction(ofstream *fout);
+    virtual void mMCartoon(ofstream *fout);
 };
 
 class FictionFilm : public Film {
@@ -31,6 +34,9 @@ public:
     string getTypeFilm() override;
     void readFromFile(ifstream *fin);
     void writeToFile(ofstream *fout);
+    void multiMethod(Film *otherFilm, ofstream *fout);
+    void mMFiction(ofstream *fout);
+    void mMCartoon(ofstream *fout);
 };
 
 enum typeCartoon {CLAY, HAND_DRAWN, COMPUTER, DOLL};
@@ -45,6 +51,9 @@ public:
     string getTypeFilm() override;
     void readFromFile(ifstream *fin);
     void writeToFile(ofstream *fout);
+    void multiMethod(Film *otherFilm, ofstream *fout);
+    void mMFiction(ofstream *fout);
+    void mMCartoon(ofstream *fout);
 };
 
 #endif //FILM_H
