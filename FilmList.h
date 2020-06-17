@@ -25,8 +25,8 @@ public:
     virtual int getSize();
     virtual FilmItem * getFirstFilm();
     virtual FilmItem * getLastFilm();
-    virtual bool readFilmsFromFile(string filename);
-    virtual bool writeFilmsToFile(string filename);
+    virtual void readFilmsFromFile(string filename);
+    virtual void writeFilmsToFile(string filename);
     virtual void sortFilmsByVowelsNumber();
 };
 

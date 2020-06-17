@@ -35,25 +35,36 @@ void FilmList::addFilm(Film *film) {
     this->size++;
 }
 
-bool FilmList::readFilmsFromFile(string filename) {
+void FilmList::readFilmsFromFile(string filename) {
 
     ifstream fin(filename);
 
     if (!fin.is_open()) {
-        return false;
+        throw "The input file was not opened. Check the file path and file permissions.";
     }
 
     bool doSort = false;
     int numFilms;
     string tmp, typeFilm, sortFilms, filterFilms;
     getline(fin, tmp);          // Количество фильмов
-    numFilms = stoi(tmp);
+
+    try {
+        numFilms = stoi(tmp);
+        if (std::to_string(numFilms) != tmp) {
+            throw std::invalid_argument("invalid argument");
+        }
+    } catch (const std::invalid_argument &msg) {
+        throw "The input file contains an invalid value for the number of films. Allowed type number of films is integer.";
+    } catch (const std::out_of_range &msg) {
+        throw "The input file contains a very large number of films.";
+    }
+
     getline(fin, sortFilms);       // Сортировка
 
     if (sortFilms == "Sort") {
         doSort = true;
     } else if (sortFilms != "No sort") {
-        return false;
+        throw "The input file contains an invalid sorting value. See README.";
     }
 
     getline(fin, filterFilms); // Фильтр
@@ -71,7 +82,7 @@ bool FilmList::readFilmsFromFile(string filename) {
             film = new DocumentaryFilm();
         } else {
             fin.close();
-            return false;
+            throw "The input file contains an incorrect film type. See README.";
         }
         film->readFromFile(&fin);
 
@@ -85,10 +96,9 @@ bool FilmList::readFilmsFromFile(string filename) {
     }
 
     fin.close();
-    return true;
 }
 
-bool FilmList::writeFilmsToFile(string filename) {
+void FilmList::writeFilmsToFile(string filename) {
 
     ofstream fout(filename);
 
@@ -96,7 +106,7 @@ bool FilmList::writeFilmsToFile(string filename) {
 
     if (!this->size) {
         fout.close();
-        return true;
+        return;
     }
 
     FilmItem *currentFilmItem = this->firstFilm; // инициализация текущего элемента списка
@@ -107,7 +117,6 @@ bool FilmList::writeFilmsToFile(string filename) {
     }
 
     fout.close();
-    return true;
 }
 
 void FilmList::sortFilmsByVowelsNumber() {

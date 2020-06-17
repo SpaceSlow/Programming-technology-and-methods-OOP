@@ -3,6 +3,7 @@
 //
 
 #include <fstream>
+#include <string>
 
 #include "Film.h"
 
@@ -107,7 +108,18 @@ void DocumentaryFilm::readFromFile(ifstream *fin) {
     Film::readFromFile(fin);
     string year;
     getline(*fin, year);
-    this->yearOfRelease = stoi(year);
+    int year_ = 0;
+    try {
+        year_ = stoi(year);
+        if (std::to_string(year_) != year) {
+            throw std::invalid_argument("invalid argument");
+        }
+    } catch (const std::invalid_argument &msg) {
+        throw "The input file contains an incorrect year for the documentary.";
+    } catch (const std::out_of_range &msg) {
+        throw "The input file contains a very large year for the documentary.";
+    }
+    this->yearOfRelease = year_;
 }
 
 void DocumentaryFilm::writeToFile(ofstream *fout) {
