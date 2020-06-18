@@ -54,6 +54,10 @@ void Film::mMCartoon(ofstream *fout) {
     *fout << "CARTOON and unknown type of film" << endl;
 }
 
+void Film::mMDocumentary(ofstream *fout) {
+    *fout << "DOCUMENTARY and unknown type of film" << endl;
+}
+
 string FictionFilm::getTypeFilm() {
     return "Fiction";
 }
@@ -78,6 +82,10 @@ void FictionFilm::mMFiction(ofstream *fout) {
 
 void FictionFilm::mMCartoon(ofstream *fout) {
     *fout << "CARTOON and FICTION" << endl;
+}
+
+void FictionFilm::mMDocumentary(ofstream *fout) {
+    *fout << "DOCUMENTARY and FICTION" << endl;
 }
 
 string CartoonFilm::getTypeCartoon() {
@@ -124,6 +132,22 @@ void CartoonFilm::writeToFile(ofstream *fout) {
     *fout << "Type animation: " << this->getTypeCartoon() << endl;
 }
 
+void CartoonFilm::multiMethod(Film *otherFilm, ofstream *fout) {
+    otherFilm->mMCartoon(fout);
+}
+
+void CartoonFilm::mMFiction(ofstream *fout) {
+    *fout << "FICTION and CARTOON" << endl;
+}
+
+void CartoonFilm::mMCartoon(ofstream *fout) {
+    *fout << "CARTOON and CARTOON" << endl;
+}
+
+void CartoonFilm::mMDocumentary(ofstream *fout) {
+    *fout << "DOCUMENTARY and CARTOON" << endl;
+}
+
 string DocumentaryFilm::getTypeFilm() {
     return "Documentary";
 }
@@ -151,14 +175,18 @@ void DocumentaryFilm::writeToFile(ofstream *fout) {
     *fout << "Year of release: " << this->yearOfRelease << endl;
 }
 
-void CartoonFilm::multiMethod(Film *otherFilm, ofstream *fout) {
-    otherFilm->mMCartoon(fout);
+void DocumentaryFilm::mMFiction(ofstream *fout) {
+    *fout << "FICTION and DOCUMENTARY" << endl;
 }
 
-void CartoonFilm::mMFiction(ofstream *fout) {
-    *fout << "FICTION and CARTOON" << endl;
+void DocumentaryFilm::mMCartoon(ofstream *fout) {
+    *fout << "CARTOON and DOCUMENTARY" << endl;
 }
 
-void CartoonFilm::mMCartoon(ofstream *fout) {
-    *fout << "CARTOON and CARTOON" << endl;
+void DocumentaryFilm::mMDocumentary(ofstream *fout) {
+    *fout << "DOCUMENTARY and DOCUMENTARY" << endl;
+}
+
+void DocumentaryFilm::multiMethod(Film *otherFilm, ofstream *fout) {
+    otherFilm->mMDocumentary(fout);
 }
