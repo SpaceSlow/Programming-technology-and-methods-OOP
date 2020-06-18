@@ -116,6 +116,8 @@ void FilmList::writeFilmsToFile(string filename) {
         currentFilmItem = currentFilmItem->nextFilm;
     }
 
+    this->multiMethod(&fout);
+
     fout.close();
 }
 
@@ -142,4 +144,18 @@ FilmItem * FilmList::getFirstFilm() {
 
 FilmItem *FilmList::getLastFilm() {
     return this->lastFilm;
+}
+
+void FilmList::multiMethod(ofstream *fout) {
+    *fout << endl << endl << "Multimethod" << endl;
+    if (!this->size) {
+        return;
+    }
+
+    for(FilmItem *filmItem1 = this->firstFilm; filmItem1->nextFilm; filmItem1 = filmItem1->nextFilm) {
+        for(FilmItem *filmItem2 = filmItem1->nextFilm; filmItem2; filmItem2 = filmItem2->nextFilm) {
+            filmItem1->film->multiMethod(filmItem2->film, fout);
+        }
+    }
+
 }

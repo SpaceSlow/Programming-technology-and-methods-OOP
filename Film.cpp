@@ -42,6 +42,18 @@ int Film::getVowelsNumberInTitle() {
     return vowelsCount;
 }
 
+void Film::multiMethod(Film *otherFilm, ofstream *fout) {
+    *fout << "Unknown type of film" << endl;
+}
+
+void Film::mMFiction(ofstream *fout) {
+    *fout << "FICTION and unknown type of film" << endl;
+}
+
+void Film::mMCartoon(ofstream *fout) {
+    *fout << "CARTOON and unknown type of film" << endl;
+}
+
 string FictionFilm::getTypeFilm() {
     return "Fiction";
 }
@@ -54,6 +66,18 @@ void FictionFilm::readFromFile(ifstream *fin) {
 void FictionFilm::writeToFile(ofstream *fout) {
     Film::writeToFile(fout);
     *fout << "Directed by " << this->stageDirector << endl;
+}
+
+void FictionFilm::multiMethod(Film *otherFilm, ofstream *fout) {
+    otherFilm->mMFiction(fout);
+}
+
+void FictionFilm::mMFiction(ofstream *fout) {
+    *fout << "FICTION and FICTION" << endl;
+}
+
+void FictionFilm::mMCartoon(ofstream *fout) {
+    *fout << "CARTOON and FICTION" << endl;
 }
 
 string CartoonFilm::getTypeCartoon() {
@@ -125,4 +149,16 @@ void DocumentaryFilm::readFromFile(ifstream *fin) {
 void DocumentaryFilm::writeToFile(ofstream *fout) {
     Film::writeToFile(fout);
     *fout << "Year of release: " << this->yearOfRelease << endl;
+}
+
+void CartoonFilm::multiMethod(Film *otherFilm, ofstream *fout) {
+    otherFilm->mMCartoon(fout);
+}
+
+void CartoonFilm::mMFiction(ofstream *fout) {
+    *fout << "FICTION and CARTOON" << endl;
+}
+
+void CartoonFilm::mMCartoon(ofstream *fout) {
+    *fout << "CARTOON and CARTOON" << endl;
 }

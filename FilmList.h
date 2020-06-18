@@ -28,6 +28,7 @@ public:
     virtual void readFilmsFromFile(string filename);
     virtual void writeFilmsToFile(string filename);
     virtual void sortFilmsByVowelsNumber();
+    virtual void multiMethod(ofstream *fout);
 };
 
 #endif //FILMLIST_H
